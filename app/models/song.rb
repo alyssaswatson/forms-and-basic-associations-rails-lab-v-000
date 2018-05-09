@@ -10,4 +10,25 @@ class Song < ActiveRecord::Base
   def artist_name
     self.try(:artist).try(:name)
   end
+
+  def genre_name=(name)
+    self.genre = Genre.find_or_create_by(name: name)
+  end
+
+  def genre_name
+    self.try(:genre).try(:name)
+  end
+
+  def note_contents=(contents)
+    contents.each do |content|
+      if content != ""
+        note = Note.find_or_create_by(content: content)
+        self.notes << note unless self.notes.include?(note)
+      end
+    end
+  end
+
+  def note_contents
+    self.notes.collect { |note| note[:content] }
+  end
 end
