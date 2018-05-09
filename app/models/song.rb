@@ -4,6 +4,6 @@ class Song < ActiveRecord::Base
   has_many :notes
 
   def artist_name
-    self.artist.name
+    self.try(:artist).try(:name)
   end
 end
