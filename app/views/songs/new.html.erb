@@ -6,5 +6,6 @@
   <br />
   <%= f.text_field :artist_name %>
   <br />
+  <%= f.collection_select :genre_id, Genre.all, :id, :name %>
   <%= f.submit %>
 <% end %>
